@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Imp docu/Social Media Addiction Analysis/social_media.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3554"/><column_width id="4" width="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="screen_time" custom_title="0" dock_id="1" table="4,11:mainscreen_time"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">-- 1. Most addicted countries
+SELECT country, AVG(addiction_score) as Avg_Addiction
+FROM tiktok_instagram
+GROUP BY country
+ORDER BY Avg_Addiction DESC
+LIMIT 10;
+
+-- 2. TikTok vs Instagram average usage
+SELECT 
+    AVG(tiktok_minutes_daily) as Avg_TikTok_Minutes,
+    AVG(instagram_minutes_daily) as Avg_Instagram_Minutes
+FROM tiktok_instagram;
+
+-- 3. Addiction level distribution
+SELECT addiction_level, COUNT(*) as Total_Users
+FROM tiktok_instagram
+GROUP BY addiction_level
+ORDER BY Total_Users DESC;
+
+-- 4. Average sleep by addiction level
+SELECT addiction_level, AVG(sleep_hours) as Avg_Sleep
+FROM tiktok_instagram
+GROUP BY addiction_level
+ORDER BY Avg_Sleep DESC;
+
+-- 5. Platform usage by age group
+SELECT age_group, platform, AVG(weekday_screen_hours) as Avg_Hours
+FROM screen_time
+GROUP BY age_group, platform
+ORDER BY Avg_Hours DESC;</sql><current_tab id="0"/></tab_sql></sqlb_project>
